@@ -8,12 +8,6 @@ const App = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
 
-  useEffect(() => {
-    axios
-      .get("https://6749e5aa868020296633047a.mockapi.io/api/v1/product")
-      .then((response) => setProducts(response.data))
-      .catch((error) => console.error("Помилка отримання даних:", error));
-  }, []);
 
   const handleProductClick = useCallback(
     (product) => {
@@ -29,6 +23,13 @@ const App = () => {
     const nextIndex = (currentIndex + 1) % products.length;
     setSelectedProduct(products[nextIndex]);
   }, [selectedProduct, products]);
+
+  useEffect(() => {
+    axios
+      .get("https://6749e5aa868020296633047a.mockapi.io/api/v1/product")
+      .then((response) => setProducts(response.data))
+      .catch((error) => console.error("error", error));
+  }, []);
 
   return (
     <div style={{ display: "flex", padding: "20px" }}>
